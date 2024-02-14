@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>event</title>
+    <script type="text/javascript">
+      const clickEvent = function(){
+        //console.log('click'); 
+        document.getElementById("box").innerText = "click"; //blank -> click
+        const list = document.getElementById("list");
+        const liList = list.getElementsByTagName("li");
+        //console.log(liList.length);
+        for (let index = 0; index < liList.length; index++) {
+          liList[index].innerText = "click"+(index+1);
+        }
+      }
+      // body page loading 완료 후 발생하는 이벤트로 딱 한번 실행
+      window.onload = function(){
+        document.getElementById("btn").onclick = clickEvent;
+        /*document.getElementById("btn").onclick = function(){
+          clickEvent();
+        }*/
+      };
+      
+    </script>
+  </head>
+  <body>
+  <!--<button onclick="javascript:clickEvent();">click</button>-->
+  <button id="btn">click</button>
+  <div id="box">blank</div>
+  <ul id="list">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  </body>
+</html>
+<script type="text/javascript">
+  console.log(document.getElementById("btn"));
+</script>
