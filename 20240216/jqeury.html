@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <haed>
+    <title>jquery</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+      const init = function () {
+        $("#box").on("click", function () {
+          // this.innerText = "box click";
+          // $("#box").text("click");
+          $(this).text("click");
+          console.log($(this).attr("id"));
+        });
+        $("#addBtn").on("click", function () {
+          //$("#myList").append("<li>a</li>");
+          $("#myList").prepend("<li>a</li>");
+          const li = document.createElement("li");
+          $("#myList").prepend(li);
+        });
+        $("#deleteBtn").on("click", function () {
+          //$("#box").remove();
+          // $("#myList li:first").remove();
+          $("#myList li:last").remove();
+        });
+      };
+      window.onload = init;
+    </script>
+  </haed>
+  <body>
+    <button id="addBtn">add</button>
+    <button id="deleteBtn">delete</button>
+    <ul id="myList">
+      <li>temp</li>
+    </ul>
+
+    <div id="box">text</div>
+  </body>
+</html>
