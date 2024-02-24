@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title> new document </title>
+  <link href="css/style.css" type="text/css" rel="stylesheet" />
+  <script type="text/javascript">
+	  const init = function(){
+			const buttonList = document.getElementById("buttonList");
+			const aTagList = buttonList.getElementsByTagName("a");
+			const bannerList = document.getElementById("bannerList");
+			const liTagList = bannerList.getElementsByTagName("li");
+			//console.log(aTagList,liTagList);
+			for (let index = 0; index < aTagList.length; index++) {
+				aTagList[index].onmouseover = function(){
+					console.log('sId : ',sId);
+					clearInterval(sId);
+					// html class -> dom className
+					const myNum = this.getAttribute("num");
+					changeMenu(myNum);
+					//this.className = "on";
+				}
+				aTagList[index].onmouseout = function(){
+					sId = setInterval(myTimer,3000);
+				}
+			}
+			const changeMenu = function(myNum){
+					for (let i = 0; i < aTagList.length; i++) {
+						//console.log(aTagList[i].getAttribute("num"),this.getAttribute("num"));
+						if(aTagList[i].getAttribute("num") == myNum){
+							aTagList[i].className = "on";
+							liTagList[i].className = "on";
+						}else{
+							aTagList[i].className = "";
+							liTagList[i].className = "";
+						}	
+					}
+			}
+			const myTimer = function(){
+				const aTag = buttonList.getElementsByClassName("on")[0];
+				const currentNum = parseInt(aTag.getAttribute("num")); // 1,2,3,4
+				let nextNum = currentNum + 1;
+				if(nextNum >= aTagList.length + 1){
+					nextNum = 1;
+				}
+				changeMenu(nextNum);
+			}
+			let sId = setInterval(myTimer,3000);
+		}
+		window.onload = init;
+  </script>
+ </head>
+ <body style="padding:100px;">
+	<div class="feature-banner__last">
+		<ul id="bannerList" class="feature-banner__group">
+			<li class="on">
+				<a href="#"><img src="images/1.jpg" alt=""></a>
+			</li>	
+			<li>
+				<a href="#"><img src="images/2.jpg" alt=""></a>
+			</li>
+			<li>
+				<a href="#"><img src="images/3.jpg" alt=""></a>
+			</li>
+			<li>
+				<a href="#"><img src="images/4.jpg" alt=""></a>
+			</li>
+		</ul>
+		
+		<div id="buttonList" class="tmp-nav img-dotted feature-banner__selector">
+			<a href="#" class="on" num="1"><span>1</span></a>
+			<a href="#" num="2"><span>2</span></a>
+			<a href="#" num="3"><span>3</span></a>
+			<a href="#" num="4"><span>4</span></a>
+		</div>
+	</div>
+ </body>
+</html>
