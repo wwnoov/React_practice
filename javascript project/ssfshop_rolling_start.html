@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>남원우 프로젝트</title>
+    <link
+      href="css/style.css"
+      type="text/css"
+      rel="stylesheet"
+      media="screen"
+    />
+
+    <script type="text/javascript">
+      const init = function () {
+        const pagingList = document.getElementById("pagingList");
+        const aTagList = pagingList.getElementsByTagName("li");
+        const imgList = document.getElementById("imgList");
+
+        for (let index = 0; index < aTagList.length; index++) {
+          aTagList[index].num = index;
+          aTagList[index].onmouseenter = function () {
+            for (let i = 0; i < aTagList.length; i++) {
+              const isActive = i === this.num;
+              aTagList[i].classList.toggle("active", isActive);
+              imgList
+                .getElementsByClassName("lslide")
+                [i].classList.toggle("active", isActive);
+            }
+          };
+        }
+        const changeMenu = function ([num]) {
+          console.log([num]);
+          for (let i = 0; i < aTagList.length; i++) {
+            const isActive = aTagList[i].num === num;
+            aTagList[i].classList.toggle("active", isActive);
+            const imageList = imgList.getElementsByClassName("lslide");
+            imageList[i].classList.toggle("active", isActive);
+          }
+        };
+
+        const myTimer = function () {
+          const activeList = pagingList.getElementsByClassName("active");
+          let num = activeList[0].num + 1;
+
+          if (num >= aTagList.length) {
+            num = 0;
+          }
+          changeMenu([num]);
+        };
+        let sId = setInterval(myTimer, 2000);
+
+        document.getElementById("btnNext").onclick = function () {
+          const activeList = pagingList.getElementsByClassName("active");
+          let num = activeList[0].num + 1;
+
+          if (num >= aTagList.length) {
+            num = 0;
+          }
+
+          aTagList[num].onmouseenter();
+        };
+
+        document.getElementById("btnPrev").onclick = function () {
+          const activeList = pagingList.getElementsByClassName("active");
+          let num = activeList[0].num - 1;
+
+          if (num < 0) {
+            num = aTagList.length - 1;
+          }
+
+          aTagList[num].onmouseenter();
+        };
+      };
+
+      window.onload = init;
+    </script>
+  </head>
+  <body>
+    <div class="mainSlider">
+      <!-- 슬라이더 이미지 -->
+      <div class="lSSlideOuter">
+        <div class="lSSlideWrapper usingCss">
+          <ul class="mainImg lightSlider lSFade" id="imgList">
+            <li class="lslide active">
+              <a href="#" class="imgWrap">
+                <img src="images/1.jpg" alt="LYA LOVE CAMPAIGN" />
+              </a>
+            </li>
+            <li class="lslide">
+              <a href="#" class="imgWrap">
+                <img src="images/2.jpg" alt="루키콜라보" />
+              </a>
+            </li>
+            <li class="lslide">
+              <a href="#" class="imgWrap">
+                <img src="images/3.jpg" alt="(쿠폰X) 8S X KAKAO" />
+              </a>
+            </li>
+            <li class="lslide">
+              <a href="#" class="imgWrap">
+                <img src="images/4.jpg" alt="SUMMER NEW ITEM" />
+              </a>
+            </li>
+            <li class="lslide">
+              <a href="#" class="imgWrap">
+                <img src="images/5.jpg" alt="D" />
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="lSAction">
+          <a class="lSPrev" id="btnPrev"></a>
+          <a class="lSNext" id="btnNext"></a>
+        </div>
+        <div class="lSPager lSpg">
+          <ul id="pagingList">
+            <li class="active"><a href="#">1</a></li>
+            <li class=""><a href="#">2</a></li>
+            <li class=""><a href="#">3</a></li>
+            <li class=""><a href="#">4</a></li>
+            <li class=""><a href="#">5</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
